@@ -5,9 +5,14 @@ fetch("/api/transaction")
   .then(response => {
     return response.json();
   })
-  .then(data => {
+  .then(async data => {
+
     // save db data on global variable
     transactions = data;
+
+    //work on full offline functionality
+    const cachedTrans = await getValues();
+    // console.log(cachedTrans)
 
     populateTotal();
     populateTable();
@@ -108,6 +113,11 @@ function sendTransaction(isAdding) {
   transactions.unshift(transaction);
 
   // re-run logic to populate ui with new record
+
+  
+  
+
+
   populateChart();
   populateTable();
   populateTotal();
